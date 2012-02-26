@@ -70,17 +70,24 @@ public class CubeTest {
      * Test of get method, of class Cube.
      */
     @Test
-    public void testGet_4args() {
-        System.out.println("get");
-        int i = 0;
-        int i0 = 0;
-        int i1 = 0;
-        int i2 = 0;
-        Cube instance = null;
-        long expResult = 0L;
-        long result = instance.get(i, i0, i1, i2);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testGet_4args_small() {
+       final int size = 100;
+        Cube cube = new Cube(size);
+        testGenerator tgen = new testGenerator();
+        cube.fill(tgen);
+        long result = cube.get(10, 10, 0, 5);
+        assertEquals(505010, result);
     }
-}
+
+    @Test
+    public void testGet_4args_big() {
+       final int size = 813;
+        Cube cube = new Cube(size);
+        testGenerator tgen = new testGenerator();
+        cube.fill(tgen);
+        long result = cube.get(10, 10, 0, 5);
+        assertEquals(505010, result);
+        result = cube.get(812, 812, 0, 812);
+        assertEquals(3089110, result);
+    }
+} 
